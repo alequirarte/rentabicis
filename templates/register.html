@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Registrarse{% endblock %}
+{% block head %}
+{{super()}}
+
+{% endblock %}
+{% block body %}
+
+<div class="contenedor__todo">
+    
+    <div  class="caja__traserar">  
+        <div> 
+           
+         
+          </div>
+        <form action="" method="POST">
+            
+            <div id="registrobien">
+                
+                <h2 id="inicio_regis">Registrarse</h2>
+                <label for='ncompleto' id="usuario">Nombre completo:</label> <br>
+                <input type="text" id="usuario2" name="ncompleto" placeholder="Nombre completo">
+                <p> </p>
+                <label for='correo' id="usuario">Correo:</label> <br>
+                <input type="text" id="usuario2" name="correo" placeholder="Correo Electrónico">
+                <p> </p>
+                <label for='usuario' id="usuario">Usuario:</label> <br>
+                <input type="text" id="usuario2" name="usuario" placeholder="Usuario">
+                <p> </p> 
+                <label for='password' id="usuario">Contraseña:</label> <br>
+                <input type="password" id="usuario2" name="password" placeholder="Contraseña">
+                <p> </p>
+                <input id="enviar" type="submit" name="enviar" value="Entrar">
+            </div>
+            
+                
+            
+            
+        </form>
+    </div>
+
+</div>
+
+    
+{% endblock %}

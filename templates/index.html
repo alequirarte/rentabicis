@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}Rent2Ride{% endblock %}
+{% block head %}
+<style>
+
+    
+</style>
+{{super()}}
+
+{% endblock %}
+{% block body %}
+
+{% if confi == true %}
+  <div class="alert alert-primary" id="alerta">
+    Bicicleta agendada correctamente
+  </div>       
+{% endif %}
+
+
+
+
+{%  if session['logged_in'] == True  %}
+ 
+<div class="caja__trasera_menu">  
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/static/img/bici1.jpg" width="50%" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="/static/img/bici3.png" width="50%" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="/static/img/bici4.png" width="50%" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+
+
+    <div id="Botones">
+      <button type="button" class="button-29"><a href="/citas/" id="abtn">  Rentar bicicleta </a></button>
+      <button type="button" class="button-29" role="button"><a href="/lista_citas/" id="abtn">  Bicicletas agendadas </a></button>
+    </div>
+</div>
+
+{% else %}
+    <div class="contenedor__todo">
+        <div class="caja__trasera">
+            
+                
+                <div> 
+                  <h3 id="inicio_regis"> Renta una bicicleta que ames </h3>
+                  <p id="info">Ya sea que esté de viaje y quieres ver los paisajes o esté buscando un paseo en el parque de Central Perk, nosotros tenemos su bicicleta.</p>
+                  <img src="/static/img/estac.png" alt=""  class="center">
+                </div>
+                
+              
+            
+            
+                <form action="" method="POST">
+                  
+                  <div id="registrobien">
+                    <h3 id="inicio_regis">Iniciar sesión</h3>
+                    <label for="usuario" id="usuario">Usuario:</label>
+                    <input type="text" id="usuario2" name="usuario" >
+                    <p> </p>
+                    <label for="password" id="usuario">Contraseña:</label>
+                    <input type="password" id="usuario2" name="password">
+                    <p> </p>
+                    <input id="enviar" type="submit" name="enviar" value="Entrar">
+                    <p id="info2">¿Aún no tienes una cuenta? <a href="/register"> Regístrate</a> </p>
+                  </div >
+                  
+                
+                </form> 
+              
+            </div>    
+            
+            
+         
+    </div>
+{% endif %}
+
+
+
+
+
+
+{% endblock %}
+{% block footer %}
+
+{% endblock %}

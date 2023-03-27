@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Bicicletas agendadas {% endblock %}
+{% block head %}
+{{super()}}
+
+{% endblock %}
+{% block body %}
+
+
+
+<div class="contenedor__animal">
+    
+    <div  class="caja__trasera_mascotas"> 
+        <h2 id="titu"> Bicicletas agendadas de {{session['usuario']}}</h2>  
+
+        <div>
+            <table id="tabla">
+                <tr>
+ 
+                    <th scope="col"> NÚMERO DE BICICLETA </th>
+                    <th scope="col"> FECHA </th>
+                    <th scope="col"> NÚMERO DE HORAS</th>
+                </tr>
+                {% for id,diccionario in dicc_citas.items() %} 
+                    {% if session['usuario'] == diccionario['usuario']  %}
+                 <tr>
+              
+                  <td>{{diccionario['numbici']}} </td>
+                  <td> {{diccionario['fecha']}} </td>
+                  <td>{{diccionario['horas']}}</td>
+              
+                </tr>
+                {% endif %}  
+              
+                {% endfor %}
+              </table>
+           
+        </div>
+
+    </div>
+</div>
+
+
+        
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}

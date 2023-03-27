@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %} Citas {% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+
+
+
+
+<div class="contenedor__animal">
+    
+    <div  class="caja__trasera_reganimal"> 
+
+         
+
+       
+
+            <form action="" method="POST">
+                <h1 id="titu"> Agendar bicicleta   </h1>
+                <div id="registro">
+                    <h2 id="color">Posteriormente se le asignará un número de bicicleta</h2>
+                    
+                    
+                </div>
+                <div id="registro">
+                    <h2 id="color">  Horas a rentar:  </h2>
+                    <select name="horas" id = "horas">
+                        <option value="" selected="selected" hidden="hidden">Elige número de horas</option>
+                        {% for horas in lista %}
+                                <option value="{{horas}}">{{horas}} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div id="registro">
+                    <h2 id="color"> Fecha:</h2>
+                    <input type="date" name="fecha" id = "fecha"
+                    value={{hoy}}
+                    min={{hoy}} max="2023-12-31">
+                </div>
+                <div id="centro">
+                    <input id="enviar2" type="submit" name="enviar" value="Agendar">
+                </div>
+                        
+               
+        </form>   
+        
+    </div>
+</div>
+
+        
+{% endblock %}
+{% block footer %}
+
+{% endblock %}
