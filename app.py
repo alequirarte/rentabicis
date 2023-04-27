@@ -2,7 +2,7 @@
 from passlib.hash import sha256_crypt
 from flask import Flask, render_template, request, redirect, session
 
-from funciones import graba_diccionario,lee_diccionario_csv,graba_diccionario_id, lee_diccionario_csv_id
+from funciones import lee_diccionario_csv,graba_diccionario_id, lee_diccionario_csv_id
 import datetime
 import random
 
@@ -19,7 +19,6 @@ diccionario_citas = lee_diccionario_csv_id(archivo_citas)
 
 logeado = False
 first_login = False
-deslog = False
 confirmacion = False
 id = 0
 
@@ -31,18 +30,11 @@ app.secret_key = "klNmsS679SDqWpñl"
 @app.route("/")
 def index():
     
-    if logeado == True:
-        user = session['usuario']
-        if user in diccionario_usuarios:
-            return render_template("index.html")
-    else:
-        try:
-            user = session['usuario']
-            if user in diccionario_usuarios:
-                return render_template("index.html")
-        except:
-            return render_template("index.html")
+    if logeado == True or session.get('usuario') in diccionario_usuarios:
         return render_template("index.html")
+    else:
+        return render_template("index.html")
+            
 
 
 @app.route("/", methods=['GET','POST'])
@@ -72,9 +64,9 @@ def ingresar():
                         return render_template("index.html", first = first_login)
                     else:
                         msg = f'El password de {usuario} no corresponde'
-                        return render_template('index.hmtl',mensaje=msg)
+                        return render_template('index.html',mensaje=msg)
                 else:
-                        msg = f'El password de {usuario} no corresponde'
+                        msg = f'{usuario} no se encuentra registrado'
                         return render_template('index.html',mensaje=msg)
                     
     else:
@@ -89,58 +81,8 @@ def logout():
     if request.method == 'GET':
         session.clear()
         session["logged_in"] = False
-        deslog = True
-        logeado = False
-        return render_template("index.html", deslogeado = deslog)
-    
-    
-    if request.method == 'POST':
-                    usuario = request.form['usuario']
-
-                    if usuario in diccionario_usuarios:
-                        password_db = diccionario_usuarios[usuario]['password'] # password guardado
-                        password_forma = request.form['password'] #password presentado
-                        verificado = sha256_crypt.verify(password_forma,password_db)
-                        if (verificado == True):
-                            session['usuario'] = usuario
-                            session['logged_in'] = True
-                            first_login = True
-                            logeado = True
-                            return render_template("index.html", first = first_login)
-                        else:
-                            msg = f'El password de {usuario} no corresponde'
-                            return render_template('/',mensaje=msg)
-                    else:
-                        msg = f'El password de {usuario} no corresponde'
-                        return render_template('index.html',mensaje=msg)
-                        
-        
-    
-
-@app.route("/register/", methods=['POST','GET'])
-def registrarse():
-    if request.method == 'POST':
-                valor = request.form['enviar']
-                if valor == 'Entrar':
-                    nombre  =  request.form['ncompleto']
-                    correo    =  request.form['correo']
-                    usuario =  request.form['usuario']
-                    password = request.form['password']
-                    password = sha256_crypt.hash(password)
-                    tipo = "usuario"
-                    
-                    if usuario not in diccionario_usuarios:
-                        diccionario_usuarios[usuario] = {
-                            'nombre': nombre,
-                            'correo'  : correo,
-                            'usuario' : usuario,
-                            'password' : password,
-                            'tipo' : tipo
-                        }
-                    graba_diccionario(diccionario_usuarios,'usuario',archivo_usuarios)
-                return redirect('/')
-    else:
-     return render_template("register.html")
+        return redirect('/')
+ 
     
 
 
